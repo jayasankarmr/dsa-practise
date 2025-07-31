@@ -1,18 +1,20 @@
 class Solution(object):
     def isPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
-        clean_s=""
-        for i in s:
-            if i.isalnum():
-                clean_s+=i.lower()
-            else:
+        left, right = 0, len(s) - 1
+
+        while left < right:
+            if not s[left].isalnum():
+                left += 1
                 continue
-        print(clean_s)
-        if clean_s[::-1] == clean_s:
-            return True
-        else:
-            return False
-        
+            
+            if not s[right].isalnum():
+                right -= 1
+                continue
+
+            if s[left].lower() != s[right].lower():
+                return False
+            
+            left += 1
+            right -= 1
+            
+        return True
